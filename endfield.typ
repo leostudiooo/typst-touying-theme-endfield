@@ -65,16 +65,37 @@
 #let endfield-footer(self) = {
   set align(bottom)
   set text(size: 0.8em)
-  show: pad.with(.5em)
-  components.left-and-right(
-    text(fill: if self.store.navigation == "sidebar" {self.colors.neutral-light} else {self.colors.neutral-darker}, utils.call-or-display(
-      self,
-      self.store.footer,
-    )),
-    text(fill: self.colors.neutral-darker, utils.call-or-display(
-      self,
-      self.store.footer-right,
-    )),
+  stack(
+    dir: ttb,
+    stack(
+      dir: ltr,
+      line(stroke: .2em + self.colors.neutral-dark.darken(50%), length: 2em),
+      line(stroke: .2em + cmyk(0%, 100%, 0%, 0%), length: 2em),
+      line(stroke: .2em + cmyk(100%, 0%, 0%, 0%), length: 2em),
+      line(stroke: .2em + self.colors.primary, length: 100% - 2em * 3), // to fill the rest
+    ),
+    block(
+      fill: self.colors.neutral-dark.darken(50%),
+      width: 100%,
+      inset: .5em,
+      components.left-and-right(
+        text(
+          // fill: if self.store.navigation == "sidebar" { self.colors.neutral-light } else { self.colors.neutral-darker },
+          fill: self.colors.neutral-light,
+          utils.call-or-display(
+            self,
+            self.store.footer,
+          ),
+        ),
+        block(fill: self.colors.neutral-dark.darken(20%), outset: .5em, text(
+          fill: self.colors.neutral-light,
+          utils.call-or-display(
+            self,
+            self.store.footer-right,
+          ),
+        )),
+      ),
+    ),
   )
 }
 
@@ -158,7 +179,7 @@
   )
   let info = self.info + args.named()
   let body = {
-    set page(margin: (2em))
+    set page(margin: 2em)
     set text(fill: self.colors.neutral-darker)
     set align(left + horizon)
     block(
@@ -385,7 +406,8 @@
     short-heading: true,
   ),
   footer: none,
-  footer-right: context utils.slide-counter.display() + " / " + utils.last-slide-number,
+  footer-right: context text(utils.slide-counter.display(), fill: rgb("#FFFA01"), weight: "black")
+    + text(" / " + utils.last-slide-number, size: 0.618em),
   primary: rgb("#FFFA01"),
   alpha: 40%,
   subslide-preamble: self => block(
@@ -448,9 +470,9 @@
       init: (self: none, body) => {
         set text(fill: self.colors.neutral-darkest)
         show heading: set text(font: "HarmonyOS Sans", fill: self.colors.neutral-darkest)
-        show heading.where(level: 1): set text(font: ("HarmonyOS Sans"), fill: self.colors.neutral-darkest)
-        show heading.where(level: 2): set text(font: ("HarmonyOS Sans"))
-        show heading.where(level: 3): set text(font: ("HarmonyOS Sans"))
+        show heading.where(level: 1): set text(font: "HarmonyOS Sans", fill: self.colors.neutral-darkest)
+        show heading.where(level: 2): set text(font: "HarmonyOS Sans")
+        show heading.where(level: 3): set text(font: "HarmonyOS Sans")
 
         body
       },
@@ -459,6 +481,7 @@
     config-colors(
       neutral-darkest: rgb("#191919"),
       neutral-dark: rgb("#7C7C7C"),
+      neutral: rgb("#828282"),
       neutral-light: rgb("#D9D9D9"),
       neutral-lightest: rgb("#E6E6E6"),
       primary: primary,
