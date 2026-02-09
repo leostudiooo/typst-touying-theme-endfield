@@ -179,7 +179,7 @@
               width: 0.5em,
               height: 4em,
             ),
-            text(size: 1.3em, fill: self.colors.neutral-lightest, text(
+            text(size: 1.3em, fill: self.colors.neutral-lightest.lighten(40%), text(
               weight: "black",
               font: "HarmonyOS Sans",
               info.title,
@@ -187,7 +187,7 @@
               + (
                 if info.subtitle != none {
                   linebreak()
-                  text(size: 0.9em, font: "HarmonyOS Sans", fill: self.colors.neutral-light, info.subtitle)
+                  text(size: 0.9em, font: "HarmonyOS Sans", fill: self.colors.neutral-lightest, info.subtitle)
                 }
               ),
           ),
@@ -199,7 +199,7 @@
         }
         v(1em)
         if info.date != none {
-          block(spacing: 1em, text(utils.display-info-date(self), font: "Gilroy"))
+          block(spacing: 1em, text(utils.display-info-date(self), font: "HarmonyOS Sans"))
         }
         set text(size: .8em)
         if info.institution != none {
@@ -240,7 +240,7 @@
         1.2em,
         fill: self.colors.neutral-darkest,
         weight: "bold",
-        font: "Gilroy",
+        font: "HarmonyOS Sans",
         utils.call-or-display(self, title),
       ),
       text(
@@ -282,7 +282,7 @@
         1.2em,
         fill: self.colors.neutral-darkest,
         weight: "bold",
-        font: "Gilroy",
+        font: "HarmonyOS Sans",
         utils.call-or-display(self, title),
       ),
       text(
@@ -311,7 +311,7 @@
     config-common(freeze-slide-counter: true),
     config-page(fill: self.colors.primary, margin: 2em),
   )
-  set text(fill: self.colors.neutral-darker, size: 2em, font: "Gilroy", weight: "bold")
+  set text(fill: self.colors.neutral-darker, size: 2em, font: "HarmonyOS Sans", weight: "bold")
   touying-slide(self: self, config: config, align(horizon + center, body))
 })
 
@@ -447,10 +447,10 @@
     config-methods(
       init: (self: none, body) => {
         set text(fill: self.colors.neutral-darkest)
-        show heading: set text(font: "Gilroy", fill: self.colors.neutral-darkest)
-        show heading.where(level: 1): set text(font: ("Gilroy", "HarmonyOS Sans"), fill: self.colors.neutral-darkest)
-        show heading.where(level: 2): set text(font: ("Gilroy", "HarmonyOS Sans"))
-        show heading.where(level: 3): set text(font: ("Gilroy", "HarmonyOS Sans"))
+        show heading: set text(font: "HarmonyOS Sans", fill: self.colors.neutral-darkest)
+        show heading.where(level: 1): set text(font: ("HarmonyOS Sans"), fill: self.colors.neutral-darkest)
+        show heading.where(level: 2): set text(font: ("HarmonyOS Sans"))
+        show heading.where(level: 3): set text(font: ("HarmonyOS Sans"))
 
         body
       },
