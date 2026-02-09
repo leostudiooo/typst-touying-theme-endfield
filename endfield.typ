@@ -26,7 +26,7 @@
           alpha: self.store.alpha,
           text-fill: (self.colors.primary, self.colors.neutral-lightest),
           text-size: (1em, .9em),
-          vspace: (-.2em,),
+          vspace: (- .2em,),
           indent: (0em, self.store.sidebar.at("indent", default: .5em)),
           fill: (
             self.store.sidebar.at("fill", default: _typst-builtin-repeat[.]),
@@ -67,13 +67,17 @@
   set text(size: 0.8em)
   stack(
     dir: ttb,
-    stack(
-      dir: ltr,
-      line(stroke: .2em + self.colors.neutral-dark.darken(50%), length: 2em),
-      line(stroke: .2em + cmyk(0%, 100%, 0%, 0%), length: 2em),
-      line(stroke: .2em + cmyk(100%, 0%, 0%, 0%), length: 2em),
-      line(stroke: .2em + self.colors.primary, length: 100% - 2em * 3), // to fill the rest
-    ),
+    if self.store.navigation == "sidebar" {
+        line(stroke: .2em + self.colors.primary, length: 100%)
+    } else {
+      stack(
+        dir: ltr,
+        line(stroke: .2em + self.colors.neutral-dark.darken(50%), length: 2em),
+        line(stroke: .2em + cmyk(0%, 100%, 0%, 0%), length: 2em),
+        line(stroke: .2em + cmyk(100%, 0%, 0%, 0%), length: 2em),
+        line(stroke: .2em + self.colors.primary, length: 100% - 2em * 3), // to fill the rest
+      )
+    },
     block(
       fill: self.colors.neutral-dark.darken(50%),
       width: 100%,
@@ -454,7 +458,7 @@
       header-ascent: 0em,
       footer-descent: 0em,
       margin: if navigation == "sidebar" {
-        (top: 2em, bottom: 1em, left: sidebar.width)
+        (top: 2em, bottom: 2em, left: sidebar.width)
       } else if navigation == "mini-slides" {
         (top: mini-slides.height, bottom: 2em, x: mini-slides.x)
       } else {
