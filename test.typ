@@ -3,58 +3,110 @@
 
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/zh-kit:0.1.0"
+#import "@preview/sicons:16.0.0": *
 
+// Footnote setting
+#show footnote.entry: set text(size: 0.8em)
+
+// Main theme settings
 #show: endfield-theme.with(
   aspect-ratio: "16-9",
   footer: self => self.info.institution,
-  navigation: "sidebar", // sidebar, mini-slides, none
-  config-info(
-    title: [Title],
-    subtitle: [Subtitle],
-    author: [An Author#footnote[This is the affiliation], Another Author#footnote[This is another affiliation]],
-    date: datetime.today(),
-    institution: text("ENDFIELD", font: "Gilroy", weight: "bold") + text(" INDUSTRIES", font: "Gilroy", size: 0.618em),
+  navigation: "none", // sidebar, mini-slides, none, if you have many subtitles and subsubtitles, choose mini-slides or none. default is none.
+  mini-slides: (height: 3.5em),
+  config-store(
+    title-height: 6em,
   ),
-  config-page(fill: rgb("#e6e6e6")) // recommended to use pure color instead of gradient when using sidebar navigation and/or printing
+  config-info(
+    title: [Interdimensional Dynamics and Phenomenological\ Impact of the Ætherside in Talos II],
+    subtitle: [A Comprehensive Review],
+    author: [
+      #grid(
+        columns: (auto, auto),
+        align: center,
+        gutter: 0.5em,
+        [
+          Endministrator#footnote(numbering: "*")[Equal contributions]<eq-contrib> #counter(footnote).update(0) #footnote[Endfield Industries, O. M. V. Dijiang, Talos II Synchorous Orbit]<endfield> #h(1em)
+          Perlica @eq-contrib @endfield #h(1em)
+          Qin Jiangchi @eq-contrib @endfield #footnote[United Workers' Syndicates of Talos II (Valley IV Base), Valley IV, Talos II]<uwst> #h(1em)
+          Andrew @eq-contrib @endfield @uwst #h(1em)
+          Yvonne @eq-contrib @endfield @uwst
+        ],
+        [
+          Zhuang Fangyi @eq-contrib #footnote[Hongshan Academy of Sciences, Wuling Special Area for Science Development, Talos II]
+        ],
+
+        [`{endmin,perlica,jqin,andrew,yvonne}@endfield.co.ii.talos`],
+        [`fzhuang@has.ac.ii.talos`]
+      )
+    ],
+    date: [2026-01-22],
+    institution: text("ENDFIELD", font: "Gilroy", weight: "bold") + text(" INDUSTRIES", font: "Gilroy", size: 0.8em),
+  ),
+  config-page(fill: rgb("#e6e6e6")), // recommended to use pure color instead of gradient when using sidebar navigation and/or printing
 )
 
+// Text language setting for localization and correct glyphs, default is "en" (English)
+// #set text(lang: "zh", region: "cn")
+
+// Heading numbering setting
 #set heading(numbering: numbly("{1}.", default: "1.1"))
+
+// Equation numbering setting
+#set math.equation(numbering: "(1)")
 
 #title-slide()
 
 #outline-slide()
 
-= Section A
+= Fundamental Phenomenology
 
-== Subsection A.1
+== Dimensional Topology
 
-$ x_(n+1) = (x_n + a / x_n) / 2 $
+The Ætherside represents a comprehensive dimensional state at Depth 1, overlapping with realspace (Depth 0) across subterranean, atmospheric, and orbital regions. @depth-equation shows the correlation between proximity to rift boundaries and local Depth readings.
 
-== Subsection A.2
-=== Subsubsection
-A slide with *important* infos#footnote[This is a footnote.].
+$ D(x) = 1 - e^(-lambda x) $ <depth-equation>
 
-= Section B
+Where $D$ represents local Depth readings and $x$ denotes proximity to rift boundaries.
 
-== Subsection B.1
+== Biological Hazards
 
-#lorem(80)
+=== Active Blight Etiology
+
+Direct exposure to Ætherside matter causes *irreversible* termination of biological processes#footnote[Band Accord Resolution 934 strictly prohibits live-subject transposition experiments.].
+
+Conversely, matter emerging from Ætherside generates Active Blight in realspace, presenting existential contamination risks.
+
+= Engineering Applications
+
+== Originium Modulation
+
+Cultivating Originium deposits reduces local Depth readings, effectively stabilizing dimensional barriers and containing rift expansion. However, operational interference with Arts-dependent machinery remains problematic in overlap zones.
+
+- some point
+  - some subpoint
+- some other point
+
++ some enumerated point
++ some other enumerated point
 
 #focus-slide[
-  Wake Up!
+  #text(size: 2em, font: "Gilroy")[WARNING]\
+  Active Blight Detected\
+  #text(weight: "light")[Maintain Minimum Safe Distance from Undocumented Rift Formations]
 ]
 
-== Subsection B.2
+== Experimental Methodologies
 
-We can use `#pause` to #pause display something later.
+#block(fill: luma(250), inset: 1em, radius: 0.5em)[We can use `#pause` and `#meanwhile` to #pause demonstrate critical safety protocols.]
 
 #pause
 
-Just like this.
+All personnel must utilize shielded exosuits when Depth readings exceed 0.3.
 
 #meanwhile
 
-Meanwhile, #pause we can also use `#meanwhile` to #pause display other content synchronously.
+Meanwhile, #pause energy extraction operations #pause require redundant containment arrays to prevent cascade failures.
 
 #show: appendix
 
@@ -62,4 +114,31 @@ Meanwhile, #pause we can also use `#meanwhile` to #pause display other content s
 
 == Appendix
 
-Please pay attention to the current slide number.
+#block(fill: luma(250), inset: 1em, radius: 0.5em)[Please pay attention to the current slide number.]
+
+Key sources include the Talos-II Research Consortium archives and Band Accord safety documentation.
+
+== Notes
+
+If your are new to Typst and Touying, you can check out:
+- #link("https://typst.app/docs") for Typst, and
+- #link("https://touying-typ.github.io/") for Touying.
+
+I personally recommend you to use Visual Studio Code with a Typst extension for editing and real-time preview.
+
+You may want to install `Harmony OS Sans` and `Gilroy` for better display effect. The default main font is `Harmony OS Sans`, and the focus slide uses a customized setting for the "WARNING" text with `Gilroy` for better emphasis. *Note that `Gilroy` is a commercial font*, you may need to purchase a license for non-personal use.
+
+== Known Issues
+
+1. Unfortunately, the HarmonyOS Sans family has a non-standarized font stretch metadata, and typst would interpret the font weight "light" to use a condensed variant of the font #text(weight: "light", "just like this"), and _italic_ style would also be affected. *Bold* renders correctly for now. You cannot fix this by using `#text(stretch: 100%)` since the condensed variant also has a `stretch: 1000` metadata. You may want to use `Source Sans` or `Source Han Sans` as an alternative, uninstall the condensed series, try a community workaround #footnote[#link("https://github.com/typst/typst/issues/2917")], or wait for an official fix from Typst in the future #footnote[#link("https://github.com/typst/typst/issues/2098"), still open by Feb 2026.]. Or, you can optimistically regard it as a feature of the font family.
+#pagebreak()
+2. Sidebar navigation does not work responsively (i.e. does not change outline depth or text size based on the number of slides, it _overflows_ as you can see in the left). Similar issue also exists for mini-slides, but you can customize like `mini-slides: (height: 3em)`. This is due to the limit of touying's built-in `custom-progressive-outline` and `mini-slides` components. Maybe in the future I can implement a more advanced version of these components to fix this. Any useful sugeggetions or PRs are welcome! But if you dont want the bother, just use `navigation: "none"`.
+#pagebreak()
+3. Also, the decoration bar of the title slide has a similar issue. Currently this can be fixed by setting a larger `title-height` in `config-store` when the title wraps to multiple lines, but this is not an ideal solution. Again, any useful suggestions or PRs are welcome!
+
+== Disclaimer
+
+_Arknigts: Endfield_ is a video game by #link("https://hypergryph.com", "Hypergryph") (or #link("https://gryphline.com/", "Gryphline") outside of China mainland). This typst touying theme is not affiliated with Hypergryph or any of its subsidiaries. All trademarks and registered trademarks are the property of their respective owners.
+
+#heading(depth: 2, outlined: false)[Thank You!]
+Issues and PR Welcome at #link("https://github.com/leostudiooo/typst-touying-theme-endfield", [#box(sicon(slug: "github")) `leostudiooo/typst-touying-theme-endfield`]).

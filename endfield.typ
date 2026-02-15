@@ -12,7 +12,7 @@
       {
         show: block.with(
           width: self.store.sidebar.width - 1em,
-          inset: (x: 1em, top: 4em),
+          inset: (1em),
           fill: self.colors.neutral-dark.darken(50%),
           height: 24em, // hack to make it just above footer: 24em - 0.5em x 2 (padding) - 0.8em (footer height) = 22.2em
         )
@@ -73,8 +73,8 @@
       stack(
         dir: ltr,
         line(stroke: .2em + self.colors.neutral-dark.darken(50%), length: 2em),
-        line(stroke: .2em + cmyk(0%, 100%, 0%, 0%), length: 2em),
         line(stroke: .2em + cmyk(100%, 0%, 0%, 0%), length: 2em),
+        line(stroke: .2em + cmyk(0%, 100%, 0%, 0%), length: 2em),
         line(stroke: .2em + self.colors.primary, length: 100% - 2em * 3), // to fill the rest
       )
     },
@@ -193,16 +193,16 @@
         block(
           fill: self.colors.neutral-dark.darken(50%),
           width: 100%,
-          grid(
-            columns: (auto, auto),
-            gutter: 1em,
-            align: left,
+          // inset: (y: 1em,),
+          stack(
+            dir: ltr,
+            spacing: 1em,
             block(
               fill: self.colors.primary,
               inset: 0em,
               outset: 0em,
               width: 0.5em,
-              height: 4em,
+              height: self.store.title-height,
             ),
             text(size: 1.3em, fill: self.colors.neutral-lightest.lighten(40%), text(
               weight: "black",
@@ -324,6 +324,21 @@
   )
 })
 
+#let config-fonts(
+  cjk-font-family: (
+    "HarmonyOS Sans",
+    "Noto Sans CJK"
+  ),
+  latin-font-family: (
+    "HarmonyOS Sans",
+    "Inter",
+  ),
+  lang: "en",
+  region: "us",
+) = {
+  let font-family = cjk-font-family + latin-font-family
+  set text(font: font-family, lang: lang, region: region)
+}
 
 /// Focus on some content.
 ///
@@ -353,11 +368,12 @@
 ///
 /// ```typ
 /// config-colors(
-///   neutral-darkest: rgb("#E6E6E6"),
-///   neutral-dark: rgb("#D9D9D9"),
-///   neutral-light: rgb("#7C7C7C"),
-///   neutral-lightest: rgb("#191919"),
-///   primary: rgb("#FFFA01"),
+///   neutral-darkest: rgb("#191919"),
+///   neutral-dark: rgb("#7C7C7C"),
+///   neutral: rgb("#828282"),
+///   neutral-light: rgb("#D9D9D9"),
+///   neutral-lightest: rgb("#E6E6E6"),
+///   primary: rgb("FFFA01"),
 /// )
 /// ```
 ///
@@ -393,7 +409,7 @@
 /// - subslide-preamble (content, function): The preamble of the subslide. Default is `self => block(text(1.2em, weight: "bold", fill: self.colors.primary, utils.display-current-heading(depth: self.slide-level)))`.
 #let endfield-theme(
   aspect-ratio: "16-9",
-  navigation: "sidebar",
+  navigation: "none",
   sidebar: (
     width: 10em,
     filled: false,
@@ -447,7 +463,7 @@
     mini-slides,
   )
   set text(size: 20pt, font: "HarmonyOS Sans")
-  set par(justify: true)
+  set par(justify: false)
 
   show: touying-slides.with(
     config-page(
@@ -499,6 +515,7 @@
       footer-right: footer-right,
       alpha: alpha,
       subslide-preamble: subslide-preamble,
+      title-height: 4em,
     ),
     ..args,
   )
