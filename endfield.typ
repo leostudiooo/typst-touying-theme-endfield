@@ -206,13 +206,12 @@
             ),
             text(size: 1.3em, fill: self.colors.neutral-lightest.lighten(40%), text(
               weight: "black",
-              font: "HarmonyOS Sans",
               info.title,
             ))
               + (
                 if info.subtitle != none {
                   linebreak()
-                  text(size: 0.9em, font: "HarmonyOS Sans", fill: self.colors.neutral-lightest, info.subtitle)
+                  text(size: 0.9em, fill: self.colors.neutral-lightest, info.subtitle)
                 }
               ),
           ),
@@ -224,7 +223,7 @@
         }
         v(1em)
         if info.date != none {
-          block(spacing: 1em, text(utils.display-info-date(self), font: "HarmonyOS Sans"))
+          block(spacing: 1em, text(utils.display-info-date(self)))
         }
         set text(size: .8em)
         if info.institution != none {
@@ -265,7 +264,6 @@
         1.2em,
         fill: self.colors.neutral-darkest,
         weight: "bold",
-        font: "HarmonyOS Sans",
         utils.call-or-display(self, title),
       ),
       text(
@@ -307,7 +305,6 @@
         1.2em,
         fill: self.colors.neutral-darkest,
         weight: "bold",
-        font: "HarmonyOS Sans",
         utils.call-or-display(self, title),
       ),
       text(
@@ -324,21 +321,36 @@
   )
 })
 
+/// Font configuration helper that can be passed to the theme
+///
+/// Example:
+/// ```typst
+/// #show: endfield-theme.with(
+///   config-fonts(
+///     cjk-font-family: ("Source Han Sans", "Noto Sans CJK"),
+///     lang: "zh",
+///     region: "cn",
+///   ),
+/// )
+/// ```
 #let config-fonts(
   cjk-font-family: (
     "HarmonyOS Sans",
-    "Noto Sans CJK"
   ),
   latin-font-family: (
     "HarmonyOS Sans",
-    "Inter",
   ),
   lang: "en",
   region: "us",
-) = {
-  let font-family = cjk-font-family + latin-font-family
-  set text(font: font-family, lang: lang, region: region)
-}
+) = config-store(
+  fonts: (
+    cjk: cjk-font-family,
+    latin: latin-font-family,
+    combined: latin-font-family + cjk-font-family,
+  ),
+  text-lang: lang,
+  text-region: region,
+)
 
 /// Focus on some content.
 ///
@@ -351,7 +363,7 @@
     config-common(freeze-slide-counter: true),
     config-page(fill: self.colors.primary, margin: 2em),
   )
-  set text(fill: self.colors.neutral-darker, size: 2em, font: "HarmonyOS Sans", weight: "bold")
+  set text(fill: self.colors.neutral-darker, size: 2em, weight: "bold")
   touying-slide(self: self, config: config, align(horizon + center, body))
 })
 
@@ -462,7 +474,36 @@
     ),
     mini-slides,
   )
-  set text(size: 20pt, font: "HarmonyOS Sans")
+  
+  // Extract font configuration from config-fonts if provided
+  // config-fonts returns config-store which is in args.pos()
+  let font-config = args.pos().find(item => {
+    type(item) == dictionary and "fonts" in item
+  })
+  
+  let fonts = if font-config != none {
+    font-config.fonts
+  } else {
+    (
+      cjk: ("HarmonyOS Sans",),
+      latin: ("HarmonyOS Sans",),
+      combined: ("HarmonyOS Sans",),
+    )
+  }
+  
+  let text-lang = if font-config != none {
+    font-config.at("text-lang", default: "en")
+  } else {
+    "en"
+  }
+  
+  let text-region = if font-config != none {
+    font-config.at("text-region", default: "us")
+  } else {
+    "us"
+  }
+  
+  set text(size: 20pt, font: fonts.combined, lang: text-lang, region: text-region)
   set par(justify: false)
 
   show: touying-slides.with(
@@ -488,11 +529,13 @@
     ),
     config-methods(
       init: (self: none, body) => {
-        set text(fill: self.colors.neutral-darkest)
-        show heading: set text(font: "HarmonyOS Sans", fill: self.colors.neutral-darkest)
-        show heading.where(level: 1): set text(font: "HarmonyOS Sans", fill: self.colors.neutral-darkest)
-        show heading.where(level: 2): set text(font: "HarmonyOS Sans")
-        show heading.where(level: 3): set text(font: "HarmonyOS Sans")
+        set text(
+          fill: self.colors.neutral-darkest,
+          font: self.store.fonts.combined,
+          lang: self.store.text-lang,
+          region: self.store.text-region,
+        )
+        show heading: set text(fill: self.colors.neutral-darkest)
 
         body
       },
@@ -516,6 +559,9 @@
       alpha: alpha,
       subslide-preamble: subslide-preamble,
       title-height: 4em,
+      fonts: fonts,
+      text-lang: text-lang,
+      text-region: text-region,
     ),
     ..args,
   )

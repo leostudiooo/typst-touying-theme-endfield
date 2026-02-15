@@ -43,7 +43,15 @@
     date: [2026-01-22],
     institution: text("ENDFIELD", font: "Gilroy", weight: "bold") + text(" INDUSTRIES", font: "Gilroy", size: 0.8em),
   ),
-  config-page(fill: rgb("#e6e6e6")), // recommended to use pure color instead of gradient when using sidebar navigation and/or printing
+  config-page(fill: luma(231)), // recommended to use pure color instead of gradient when using sidebar navigation and/or printing
+  
+  // you can set the default fonts for CJK and Latin scripts, and also specify the language and region for correct glyphs and localization. The default main font is `Harmony OS Sans`, you can set fallbacks or completely override it by this setting. `Arial` is not recommended for CJK for its bundled `Arial Unicode Sans MS` ugly CJK typeface; instead, use `Helvetica` or `Source Sans` for better display effect. For CJK fonts, `Source Han Sans` is a good free option, and `Harmony OS Sans` also has a good CJK typeface.
+  // config-fonts(
+  //   cjk-font-family: ("Source Han Sans",),
+  //   latin-font-family: ("Helvetica",),
+  //   lang: "zh",
+  //   region: "cn",
+  // ) 
 )
 
 // Text language setting for localization and correct glyphs, default is "en" (English)
