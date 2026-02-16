@@ -8,7 +8,6 @@ description = "Touying presentation theme inspired by Arknights: Endfield."
 repository = "https://github.com/leostudiooo/typst-touying-theme-endfield"
 keywords = ["touying", "presentation", "theme", "endfield", "arknights", "slides"]
 categories = ["presentation"]
-compiler = "0.12.0"
 exclude = [
   "examples/",
   "template/main.pdf",
