@@ -6,14 +6,14 @@ A presentation theme for [Touying](https://github.com/touying-typ/touying) inspi
 
 <table>
   <tr>
-    <td><img src="img/page-1.png" alt="title page"></td>
-    <td><img src="img/page-2.png" alt="outline page"></td>
-    <td><img src="img/page-3.png" alt="subtitle page"></td>
+    <td><img src="https://raw.githubusercontent.com/leostudiooo/typst-touying-theme-endfield/main/img/page-1.png" alt="title page"></td>
+    <td><img src="https://raw.githubusercontent.com/leostudiooo/typst-touying-theme-endfield/main/img/page-2.png" alt="outline page"></td>
+    <td><img src="https://raw.githubusercontent.com/leostudiooo/typst-touying-theme-endfield/main/img/page-3.png" alt="subtitle page"></td>
   </tr>
   <tr>
-    <td><img src="img/page-4.png" alt="content page with equations"></td>
-    <td><img src="img/page-7.png" alt="content page with bullet points and enumerations"></td>
-    <td><img src="img/page-8.png" alt="focus page"></td>
+    <td><img src="https://raw.githubusercontent.com/leostudiooo/typst-touying-theme-endfield/main/img/page-4.png" alt="content page with equations"></td>
+    <td><img src="https://raw.githubusercontent.com/leostudiooo/typst-touying-theme-endfield/main/img/page-7.png" alt="content page with bullet points and enumerations"></td>
+    <td><img src="https://raw.githubusercontent.com/leostudiooo/typst-touying-theme-endfield/main/img/page-8.png" alt="focus page"></td>
     <td></td>
   </tr>
 </table>
