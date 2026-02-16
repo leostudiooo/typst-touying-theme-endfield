@@ -1,4 +1,4 @@
-// This theme is based on touying theme Dewdrop.
+// This theme is based on touying theme Dewdrop and inspired by the art style of Arknights: Endfield, a video game by Hypergryph. 
 // By Leo Li <https://github.com/leostudiooo>
 
 #import "@preview/touying:0.6.1": *

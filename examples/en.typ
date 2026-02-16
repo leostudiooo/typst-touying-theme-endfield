@@ -1,5 +1,5 @@
 #import "@preview/touying:0.6.1": *
-#import "endfield.typ": *
+#import "../endfield.typ": *
 
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/zh-kit:0.1.0"
@@ -54,9 +54,6 @@
   // ) 
 )
 
-// Text language setting for localization and correct glyphs, default is "en" (English)
-// #set text(lang: "zh", region: "cn")
-
 // Heading numbering setting
 #set heading(numbering: numbly("{1}.", default: "1.1"))
 
@@ -73,9 +70,9 @@
 
 The Ætherside represents a comprehensive dimensional state at Depth 1, overlapping with realspace (Depth 0) across subterranean, atmospheric, and orbital regions. @depth-equation shows the correlation between proximity to rift boundaries and local Depth readings.
 
-$ D(x) = 1 - e^(-lambda x) $ <depth-equation>
+$ D(x) = tanh(lambda x) $ <depth-equation>
 
-Where $D$ represents local Depth readings and $x$ denotes proximity to rift boundaries.
+Where $D$ represents the Depth field taking values in $[-1, 1]$, with $D = 0$ being realspace (normal conditions), $D = -1$ the Originium Internalization Universe, and $D = 1$ the Ætherside. The parameter $x$ denotes proximity to rift boundaries. Active Blight manifests most intensely when depth readings approach $0.5$, corresponding to the Ætherside-Realspace overlap zone where the Higgs-like scalar field undergoes significant deviation from the vacuum expectation value.
 
 == Biological Hazards
 
@@ -110,7 +107,7 @@ Cultivating Originium deposits reduces local Depth readings, effectively stabili
 
 #pause
 
-All personnel must utilize shielded exosuits when Depth readings exceed 0.3.
+Personnel must don shielded exosuits when depth readings approach 0.3; erosion risk escalates dramatically beyond this threshold.
 
 #meanwhile
 
