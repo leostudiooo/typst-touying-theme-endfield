@@ -1,5 +1,5 @@
 #import "@preview/touying:0.6.1": *
-#import "../endfield.typ": *
+#import "../lib.typ": *
 
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/zh-kit:0.1.0"
