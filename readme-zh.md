@@ -114,7 +114,7 @@ typst compile main.typ
 
 ## 已知问题
 
-1. HarmonyOS Sans 字体家族的字体伸缩元数据不规范，Typst 会将字重 "light" 解析为该字体的压缩变体，斜体样式也会受到影响。目前粗体渲染正常。由于压缩变体同样具有 `stretch: 1000` 的元数据，无法通过 `#text(stretch: 100%)` 修复此问题。建议使用 `Source Sans` 或 `思源黑体` 作为替代方案，或卸载压缩系列字体，或尝试社区解决方案（https://github.com/typst/typst/issues/2917），也可等待 Typst 官方修复（https://github.com/typst/typst/issues/2098，截至 2026 年 2 月仍未关闭）。当然，你也可以乐观地将其视为该字体家族的特色。
+1. HarmonyOS Sans 字体家族的字体伸缩元数据不规范，Typst 会将字重 "light" 解析为该字体的压缩变体，斜体样式也会受到影响。目前粗体渲染正常。由于压缩变体同样具有 `stretch: 1000` 的元数据，无法通过 `#text(stretch: 100%)` 修复此问题。建议使用 `Source Sans` 或 `思源黑体` 作为替代方案，或卸载压缩系列字体，或尝试社区解决方案 https://github.com/typst/typst/issues/2917 ，也可等待 Typst 官方修复（https://github.com/typst/typst/issues/2098 ，截至 2026 年 2 月仍未关闭）。当然，你也可以乐观地将其视为该字体家族的特色。
 2. 侧边栏导航不支持自适应布局（即不会根据幻灯片数量自动调整大纲深度或文字大小，可能发生*内容溢出*）。缩略幻灯片模式也存在类似问题，但可通过 `mini-slides: (height: 3em)` 自定义参数来调整。这是由于 touying 内置的 `custom-progressive-outline` 和 `mini-slides` 组件的限制。未来或许可以实现更高级的组件来修复此问题，欢迎提出建议或提交 PR！如果不想麻烦，直接使用 `navigation: "none"` 即可。
 3. 标题幻灯片的装饰条也存在类似问题。目前可通过在 `config-store` 中设置更大的 `title-height` 来修复标题换行时的显示问题，但这并非理想方案。同样欢迎提出有用的建议或提交 PR！
 
