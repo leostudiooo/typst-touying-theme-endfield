@@ -1,5 +1,7 @@
 # Touying Endfield Theme
 
+English | [中文](readme-zh.md)
+
 A presentation theme for [Touying](https://github.com/touying-typ/touying) inspired by the art style of *Arknights: Endfield*, a video game by Hypergryph.
 
 ## Preview
