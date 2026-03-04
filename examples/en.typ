@@ -26,14 +26,14 @@
         align: center,
         gutter: 0.5em,
         [
-          Endministrator#footnote(numbering: "*")[Equal contributions]<eq-contrib> #counter(footnote).update(0) #footnote[Endfield Industries, O. M. V. Dijiang, Talos II Synchorous Orbit]<endfield> #h(1em)
+          Endministrator#footnote(numbering: "*")[Equal contributions]<eq-contrib> #counter(footnote).update(0) #footnote[Endfield Industries, OMV Dijiang, Talos II Synchorous Orbit]<endfield> #h(1em)
           Perlica @eq-contrib @endfield #h(1em)
           Qin Jiangchi @eq-contrib @endfield #footnote[United Workers' Syndicates of Talos II (Valley IV Base), Valley IV, Talos II]<uwst> #h(1em)
           Andrew @eq-contrib @endfield @uwst #h(1em)
           Yvonne @eq-contrib @endfield @uwst
         ],
         [
-          Zhuang Fangyi @eq-contrib #footnote[Hongshan Academy of Sciences, Wuling Special Area for Science Development, Talos II]
+          Zhuang Fangyi @eq-contrib #footnote[Hongshan Academy of Sciences, Wuling ASTD, Talos II]
         ],
 
         [`{endmin,perlica,jqin,andrew,yvonne}@endfield.co.ii.talos`],
