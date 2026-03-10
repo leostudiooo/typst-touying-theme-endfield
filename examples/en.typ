@@ -12,7 +12,7 @@
 #show: endfield-theme.with(
   aspect-ratio: "16-9",
   footer: self => self.info.institution,
-  navigation: "none", // sidebar, mini-slides, none, if you have many subtitles and subsubtitles, choose mini-slides or none. default is none.
+  navigation: "mini-slides", // sidebar, mini-slides, none, if you have many subtitles and subsubtitles, choose mini-slides or none. default is none.
   mini-slides: (height: 3.5em),
   config-store(
     title-height: 6em,

@@ -1,5 +1,5 @@
 // Touying Endfield Theme
-// This theme is based on touying theme Dewdrop and inspired by the art style of Arknights: Endfield, a video game by Hypergryph. 
+// This theme is based on touying theme Dewdrop and inspired by the art style of Arknights: Endfield, a video game by Hypergryph.
 // By Leo Li <https://github.com/leostudiooo>
 
 #import "@preview/touying:0.6.3": *
@@ -13,7 +13,7 @@
       {
         show: block.with(
           width: self.store.sidebar.width - 1em,
-          inset: (1em),
+          inset: 1em,
           fill: self.colors.neutral-dark.darken(50%),
           height: 24em, // hack to make it just above footer: 24em - 0.5em x 2 (padding) - 0.8em (footer height) = 22.2em
         )
@@ -27,7 +27,7 @@
           alpha: self.store.alpha,
           text-fill: (self.colors.primary, self.colors.neutral-lightest),
           text-size: (1em, .9em),
-          vspace: (- .2em,),
+          vspace: (-.2em,),
           indent: (0em, self.store.sidebar.at("indent", default: .5em)),
           fill: (
             self.store.sidebar.at("fill", default: _typst-builtin-repeat[.]),
@@ -69,7 +69,7 @@
   stack(
     dir: ttb,
     if self.store.navigation == "sidebar" {
-        line(stroke: .2em + self.colors.primary, length: 100%)
+      line(stroke: .2em + self.colors.primary, length: 100%)
     } else {
       stack(
         dir: ltr,
@@ -180,11 +180,13 @@
     self,
     config,
     config-common(freeze-slide-counter: true),
-    config-page(margin: 0em),
+    // Avoid `set page(..)` inside the slide body: touying >= 0.6.3 adds a
+    // trailing layout anchor after the body, and page-level set rules can leak
+    // to it and create an extra blank page between slides.
+    config-page(margin: 2em),
   )
   let info = self.info + args.named()
   let body = {
-    set page(margin: 2em)
     set text(fill: self.colors.neutral-darker)
     set align(left + horizon)
     block(
@@ -236,7 +238,9 @@
       },
     )
   }
-  touying-slide(self: self, body)
+  // Title slide should never create extra subslides; force repeat = 1 to avoid
+  // accidental blank pages from auto-repeat inference.
+  touying-slide(self: self, repeat: 1, body)
 })
 
 
@@ -475,13 +479,15 @@
     ),
     mini-slides,
   )
-  
+
   // Extract font configuration from config-fonts if provided
   // config-fonts returns config-store which is in args.pos()
-  let font-config = args.pos().find(item => {
-    type(item) == dictionary and "fonts" in item
-  })
-  
+  let font-config = args
+    .pos()
+    .find(item => {
+      type(item) == dictionary and "fonts" in item
+    })
+
   let fonts = if font-config != none {
     font-config.fonts
   } else {
@@ -491,19 +497,19 @@
       combined: ("HarmonyOS Sans",),
     )
   }
-  
+
   let text-lang = if font-config != none {
     font-config.at("text-lang", default: "en")
   } else {
     "en"
   }
-  
+
   let text-region = if font-config != none {
     font-config.at("text-region", default: "us")
   } else {
     "us"
   }
-  
+
   set text(size: 20pt, font: fonts.combined, lang: text-lang, region: text-region)
   set par(justify: false)
 
