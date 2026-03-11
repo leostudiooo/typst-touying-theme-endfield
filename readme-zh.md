@@ -34,13 +34,13 @@
 在 Typst 文档中导入主题：
 
 ```typst
-#import "@preview/touying-endfield:0.1.0": *
+#import "@preview/touying-endfield:0.1.1": *
 ```
 
 或使用模板创建新项目：
 
 ```bash
-typst init @preview/touying-endfield:0.1.0 my-presentation
+typst init @preview/touying-endfield:0.1.1 my-presentation
 cd my-presentation
 typst compile main.typ
 ```

@@ -34,13 +34,13 @@ A presentation theme for [Touying](https://github.com/touying-typ/touying) inspi
 Import the theme in your Typst document:
 
 ```typst
-#import "@preview/touying-endfield:0.1.0": *
+#import "@preview/touying-endfield:0.1.1": *
 ```
 
 Or use the template to create a new project:
 
 ```bash
-typst init @preview/touying-endfield:0.1.0 my-presentation
+typst init @preview/touying-endfield:0.1.1 my-presentation
 cd my-presentation
 typst compile main.typ
 ```
