@@ -49,7 +49,7 @@ typst compile main.typ
 
 ```typst
 #import "@preview/touying:0.6.3": *
-#import "@preview/touying-endfield:0.1.0": *
+#import "@preview/touying-endfield:0.1.1": *
 
 #show: endfield-theme.with(
   aspect-ratio: "16-9",
