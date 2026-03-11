@@ -1,5 +1,5 @@
 #import "@preview/touying:0.6.3": *
-#import "../lib.typ": *
+#import "../src/lib.typ": *
 
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/zh-kit:0.1.0"
@@ -12,11 +12,13 @@
 #show: endfield-theme.with(
   aspect-ratio: "16-9",
   footer: self => self.info.institution,
-  navigation: "mini-slides", // sidebar, mini-slides, none, 如果你有很多小标题和子标题，建议选择 mini-slides 或 none。默认为 none。
+  navigation: "mini-slides", // sidebar, mini-slides, none。如果你有很多小标题和子标题，建议选择 mini-slides 或 none。默认为 none。
   mini-slides: (
-    height: 2.5em,
-    inline: true,
-    spacing: .2em,
+    height: 2.5em,            // 缩略幻灯片栏高度
+    inline: true,             // 显示模式：false = 换行显示，true = 标题行内
+    spacing: .2em,            // 幻灯片指示器之间的间距
+    current-slide-sym: $triangle.small.b.filled$,  // 当前幻灯片符号（可选）
+    other-slides-sym: $triangle.small.t.stroked$,  // 其他幻灯片符号（可选）
   ),
   config-store(
     title-height: 4.5em,
@@ -50,8 +52,8 @@
 
   // 你可以设置 CJK 和拉丁文字的默认字体，并指定语言和区域以获得正确的字形和本地化。默认主字体为 `Harmony OS Sans`，你可以通过此设置完全覆盖它。不建议使用 `Arial`，因为它捆绑的 `Arial Unicode Sans MS` CJK 字体很难看；建议使用 `Helvetica` 或 `Source Sans` 以获得更好的显示效果。对于 CJK 字体，`Source Han Sans` 是一个不错的免费选项。
   config-fonts(
-    cjk-font-family: ("HarmonyOS Sans SC",),
-    latin-font-family: ("HarmonyOS Sans",),
+    cjk-font-family: ("HarmonyOS Sans SC", "Source Han Sans", "Noto Sans CJK"),
+    latin-font-family: ("HarmonyOS Sans", "Source Sans 3", "Noto Sans"),
     lang: "zh",
     region: "cn",
   ),
