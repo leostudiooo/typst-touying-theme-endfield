@@ -14,7 +14,7 @@
   footer: self => self.info.institution,
   navigation: "mini-slides", // sidebar, mini-slides, none, if you have many subtitles and subsubtitles, choose mini-slides or none. default is none.
   mini-slides: (
-    inline: false,
+    inline: true,
     spacing: .2em,
     current-slide-sym: $triangle.small.b.filled$, // symbol for current slide, default is a filled bottom-pointing triangle
     other-slides-sym: $triangle.small.t.stroked$, // symbol for other slides, default is a stroked top-pointing triangle
