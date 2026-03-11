@@ -412,7 +412,7 @@
 ///   - short-heading (boolean): Whether the outline in the sidebar is short.
 ///
 /// - mini-slides (dictionary): The configuration of the mini-slides. You can set the height, x, display-section, display-subsection, and short-heading of the mini-slides. Default is `(height: auto, x: 2em, display-section: false, inline: true, display-subsection: true, short-heading: true)`.
-///   - height (length, auto): The height of the mini-slides. If set to `auto`, it is `3em` when `inline` is `true`, and `2.5em` when `inline` is `false`.
+///   - height (length, auto): The height of the mini-slides. If set to `auto`, it is `2.5em` when `inline` is `true`, and `3em` when `inline` is `false`.
 ///   - x (length): The x position of the mini-slides.
 ///   - display-section (boolean): Whether the slides of sections are displayed in the mini-slides.
 ///   - display-subsection (boolean): Whether the slides of subsections are displayed in the mini-slides.
