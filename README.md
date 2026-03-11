@@ -48,8 +48,8 @@ typst compile main.typ
 ## Usage
 
 ```typst
-#import "@preview/touying:0.6.1": *
-#import "@preview/touying-endfield:0.1.0": *
+#import "@preview/touying:0.6.3": *
+#import "@preview/touying-endfield:0.1.1": *
 
 #show: endfield-theme.with(
   aspect-ratio: "16-9",
@@ -104,7 +104,7 @@ Use `config-fonts()` to customize fonts:
 
 ## Example
 
-See the `examples/` directory for complete examples in English and Chinese.
+See the `examples/` directory for complete examples in [English](examples/en.typ) and [Chinese](examples/zh.typ).
 
 ## Fonts
 

@@ -1,5 +1,5 @@
-#import "@preview/touying:0.6.1": *
-#import "../lib.typ": *
+#import "@preview/touying:0.6.3": *
+#import "../src/lib.typ": *
 
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/zh-kit:0.1.0"
@@ -12,8 +12,13 @@
 #show: endfield-theme.with(
   aspect-ratio: "16-9",
   footer: self => self.info.institution,
-  navigation: "none", // sidebar, mini-slides, none, if you have many subtitles and subsubtitles, choose mini-slides or none. default is none.
-  mini-slides: (height: 3.5em),
+  navigation: "mini-slides", // sidebar, mini-slides, none, if you have many subtitles and subsubtitles, choose mini-slides or none. default is none.
+  mini-slides: (
+    inline: false,
+    spacing: .2em,
+    current-slide-sym: $triangle.small.b.filled$, // symbol for current slide, default is a filled bottom-pointing triangle
+    other-slides-sym: $triangle.small.t.stroked$, // symbol for other slides, default is a stroked top-pointing triangle
+  ),
   config-store(
     title-height: 6em,
   ),
@@ -36,22 +41,21 @@
           Zhuang Fangyi @eq-contrib #footnote[Hongshan Academy of Sciences, Wuling ASTD, Talos II]
         ],
 
-        [`{endmin,perlica,jqin,andrew,yvonne}@endfield.co.ii.talos`],
-        [`fzhuang@has.ac.ii.talos`]
+        [`{endmin,perlica,jqin,andrew,yvonne}@endfield.co.ii.talos`], [`fzhuang@has.ac.ii.talos`],
       )
     ],
     date: [2026-01-22],
     institution: text("ENDFIELD", font: "Gilroy", weight: "bold") + text(" INDUSTRIES", font: "Gilroy", size: 0.8em),
   ),
   config-page(fill: luma(231)), // recommended to use pure color instead of gradient when using sidebar navigation and/or printing
-  
+
   // you can set the default fonts for CJK and Latin scripts, and also specify the language and region for correct glyphs and localization. The default main font is `Harmony OS Sans`, you can set fallbacks or completely override it by this setting. `Arial` is not recommended for CJK for its bundled `Arial Unicode Sans MS` ugly CJK typeface; instead, use `Helvetica` or `Source Sans` for better display effect. For CJK fonts, `Source Han Sans` is a good free option, and `Harmony OS Sans` also has a good CJK typeface.
   // config-fonts(
   //   cjk-font-family: ("Source Han Sans",),
   //   latin-font-family: ("Helvetica",),
   //   lang: "zh",
   //   region: "cn",
-  // ) 
+  // )
 )
 
 // Heading numbering setting
@@ -103,7 +107,11 @@ Cultivating Originium deposits reduces local Depth readings, effectively stabili
 
 == Experimental Methodologies
 
-#block(fill: luma(250), inset: 1em, radius: 0.5em)[We can use `#pause` and `#meanwhile` to #pause demonstrate critical safety protocols.]
+#block(
+  fill: luma(250),
+  inset: 1em,
+  radius: 0.5em,
+)[We can use `#pause` and `#meanwhile` to #pause demonstrate critical safety protocols.]
 
 #pause
 

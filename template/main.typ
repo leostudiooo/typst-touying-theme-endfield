@@ -1,16 +1,25 @@
-#import "@preview/touying:0.6.1": *
-#import "@preview/touying-endfield:0.1.0": *
+#import "@preview/touying:0.6.3": *
+#import "@preview/touying-endfield:0.1.1": *
 
 #import "@preview/numbly:0.1.0": numbly
 
 // Theme configuration
+// See https://github.com/leostudiooo/typst-touying-theme-endfield/ or package examples directory for usage examples.
 #show: endfield-theme.with(
   aspect-ratio: "16-9",
-  footer: self => self.info.institution,
-  navigation: "none", // sidebar, mini-slides, or none
-  config-store(
-    // title-height: 6em, // adjust this if your title wraps to multiple lines
-  ),
+  footer: self => self.info.institution, // or you can set title, author, date, etc. here
+  navigation: "mini-slides", // mini-slides (recommended!), none, or sidebar (not recommended)
+  // Mini-slides configuration (only effective when navigation: "mini-slides")
+  // mini-slides: (
+  //   height: auto, // default handled with inline property, adjust this if you have many subtitles and the mini-slides bar height is not enough to display them
+  //   inline: true,
+  //   spacing: .2em,
+  //   current-slide-sym: $triangle.small.b.filled$, // symbol for current slide, default is a filled bottom-pointing triangle
+  //   other-slides-sym: $triangle.small.t.stroked$, // symbol for other slides, default is a stroked top-pointing triangle
+  // ),
+  // config-store(
+  //   // title-height: 6em, // adjust this if your title wraps to multiple lines
+  // ),
   config-info(
     title: [Presentation Title],
     subtitle: [Presentation Subtitle],
@@ -22,8 +31,8 @@
   
   // Uncomment and configure fonts for CJK and Latin scripts:
   // config-fonts(
-  //   cjk-font-family: ("Source Han Sans",),
-  //   latin-font-family: ("Helvetica",),
+  //   cjk-font-family: ("HarmonyOS Sans SC", "Source Han Sans"),
+  //   latin-font-family: ("HarmonyOS Sans",),
   //   lang: "zh",
   //   region: "cn",
   // ),

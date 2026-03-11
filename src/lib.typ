@@ -1,8 +1,9 @@
 // Touying Endfield Theme
-// This theme is based on touying theme Dewdrop and inspired by the art style of Arknights: Endfield, a video game by Hypergryph. 
+// This theme is based on touying theme Dewdrop and inspired by the art style of Arknights: Endfield, a video game by Hypergryph.
 // By Leo Li <https://github.com/leostudiooo>
 
-#import "@preview/touying:0.6.1": *
+#import "@preview/touying:0.6.3": *
+#import "custom-components.typ"
 
 #let _typst-builtin-repeat = repeat
 
@@ -13,7 +14,7 @@
       {
         show: block.with(
           width: self.store.sidebar.width - 1em,
-          inset: (1em),
+          inset: 1em,
           fill: self.colors.neutral-dark.darken(50%),
           height: 24em, // hack to make it just above footer: 24em - 0.5em x 2 (padding) - 0.8em (footer height) = 22.2em
         )
@@ -27,7 +28,7 @@
           alpha: self.store.alpha,
           text-fill: (self.colors.primary, self.colors.neutral-lightest),
           text-size: (1em, .9em),
-          vspace: (- .2em,),
+          vspace: (-.2em,),
           indent: (0em, self.store.sidebar.at("indent", default: .5em)),
           fill: (
             self.store.sidebar.at("fill", default: _typst-builtin-repeat[.]),
@@ -42,7 +43,8 @@
     block(
       fill: self.colors.neutral-dark.darken(50%),
       height: self.store.mini-slides.height - 1em,
-      components.mini-slides(
+      // components.mini-slides(
+      custom-components.mini-slides(
         self: self,
         fill: self.colors.primary,
         alpha: self.store.alpha,
@@ -54,8 +56,12 @@
           "display-subsection",
           default: true,
         ),
-        linebreaks: self.store.mini-slides.at("linebreaks", default: true),
+        linebreaks: false,
+        inline: self.store.mini-slides.at("inline", default: false),
+        spacing: self.store.mini-slides.at("spacing", default: .5em),
         short-heading: self.store.mini-slides.at("short-heading", default: true),
+        current-slide-sym: self.store.mini-slides.at("current-slide-sym", default: $triangle.small.b.filled$),
+        other-slides-sym: self.store.mini-slides.at("other-slides-sym", default: $triangle.small.t.stroked$),
       ),
     )
     v(1em)
@@ -69,7 +75,7 @@
   stack(
     dir: ttb,
     if self.store.navigation == "sidebar" {
-        line(stroke: .2em + self.colors.primary, length: 100%)
+      line(stroke: .2em + self.colors.primary, length: 100%)
     } else {
       stack(
         dir: ltr,
@@ -180,11 +186,13 @@
     self,
     config,
     config-common(freeze-slide-counter: true),
-    config-page(margin: 0em),
+    // Avoid `set page(..)` inside the slide body: touying >= 0.6.3 adds a
+    // trailing layout anchor after the body, and page-level set rules can leak
+    // to it and create an extra blank page between slides.
+    config-page(margin: 2em),
   )
   let info = self.info + args.named()
   let body = {
-    set page(margin: 2em)
     set text(fill: self.colors.neutral-darker)
     set align(left + horizon)
     block(
@@ -236,7 +244,9 @@
       },
     )
   }
-  touying-slide(self: self, body)
+  // Title slide should never create extra subslides; force repeat = 1 to avoid
+  // accidental blank pages from auto-repeat inference.
+  touying-slide(self: self, repeat: 1, body)
 })
 
 
@@ -401,12 +411,11 @@
 ///   - indent (length): The indent of the outline in the sidebar.
 ///   - short-heading (boolean): Whether the outline in the sidebar is short.
 ///
-/// - mini-slides (dictionary): The configuration of the mini-slides. You can set the height, x, display-section, display-subsection, and short-heading of the mini-slides. Default is `(height: 4em, x: 2em, display-section: false, display-subsection: true, linebreaks: true, short-heading: true)`.
-///   - height (length): The height of the mini-slides.
+/// - mini-slides (dictionary): The configuration of the mini-slides. You can set the height, x, display-section, display-subsection, and short-heading of the mini-slides. Default is `(height: auto, x: 2em, display-section: false, inline: true, display-subsection: true, short-heading: true)`.
+///   - height (length, auto): The height of the mini-slides. If set to `auto`, it is `2.5em` when `inline` is `true`, and `3em` when `inline` is `false`.
 ///   - x (length): The x position of the mini-slides.
 ///   - display-section (boolean): Whether the slides of sections are displayed in the mini-slides.
 ///   - display-subsection (boolean): Whether the slides of subsections are displayed in the mini-slides.
-///   - linebreaks (boolean): Whether line breaks are in between links for sections and subsections in the mini-slides.
 ///   - short-heading (boolean): Whether the mini-slides are short. Default is `true`.
 ///
 /// - footer (content, function): The footer of the slides. Default is `none`.
@@ -431,12 +440,15 @@
     short-heading: true,
   ),
   mini-slides: (
-    height: 4em,
+    height: auto,
     x: 2em,
     display-section: false,
+    inline: true,
     display-subsection: true,
-    linebreaks: true,
+    spacing: .2em,
     short-heading: true,
+    current-slide-sym: $triangle.small.b.filled$,
+    other-slides-sym: $triangle.small.t.stroked$,
   ),
   footer: none,
   footer-right: context text(utils.slide-counter.display(), fill: rgb("#FFFA01"), weight: "black")
@@ -466,44 +478,59 @@
   )
   mini-slides = utils.merge-dicts(
     (
-      height: 3em,
+      height: auto,
       x: 2em,
       display-section: false,
+      inline: true,
       display-subsection: true,
-      linebreaks: true,
+      spacing: .2em,
       short-heading: true,
+      current-slide-sym: $triangle.small.b.filled$,
+      other-slides-sym: $triangle.small.t.stroked$,
     ),
     mini-slides,
   )
-  
+
+  // Compute a dynamic default height from `inline` while preserving explicit overrides.
+  if mini-slides.height == auto {
+    mini-slides = utils.merge-dicts(
+      mini-slides,
+      (
+        height: if mini-slides.inline { 2.5em } else { 3em },
+      ),
+    )
+  }
+
   // Extract font configuration from config-fonts if provided
   // config-fonts returns config-store which is in args.pos()
-  let font-config = args.pos().find(item => {
-    type(item) == dictionary and "fonts" in item
-  })
-  
+  let font-config = args
+    .pos()
+    .find(item => {
+      type(item) == dictionary and "fonts" in item
+    })
+
   let fonts = if font-config != none {
     font-config.fonts
   } else {
     (
-      cjk: ("HarmonyOS Sans",),
-      latin: ("HarmonyOS Sans",),
-      combined: ("HarmonyOS Sans",),
+      cjk: ("HarmonyOS Sans SC", "Source Han Sans", "Noto Sans CJK"),
+      latin: ("HarmonyOS Sans", "Source Sans 3", "Noto Sans"),
+      combined: ("HarmonyOS Sans", "Source Sans 3", "Noto Sans", "HarmonyOS Sans SC", "Source Han Sans", "Noto Sans CJK"),
     )
   }
-  
+
   let text-lang = if font-config != none {
     font-config.at("text-lang", default: "en")
   } else {
     "en"
   }
-  
+
   let text-region = if font-config != none {
     font-config.at("text-region", default: "us")
   } else {
     "us"
   }
-  
+
   set text(size: 20pt, font: fonts.combined, lang: text-lang, region: text-region)
   set par(justify: false)
 

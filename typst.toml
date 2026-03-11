@@ -1,7 +1,7 @@
 [package]
 name = "touying-endfield"
-version = "0.1.0"
-entrypoint = "lib.typ"
+version = "0.1.1"
+entrypoint = "src/lib.typ"
 authors = ["Leo Li <@leostudiooo>"]
 license = "MIT"
 description = "Touying presentation theme inspired by Arknights: Endfield."
