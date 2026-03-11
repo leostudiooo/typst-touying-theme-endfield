@@ -411,12 +411,11 @@
 ///   - indent (length): The indent of the outline in the sidebar.
 ///   - short-heading (boolean): Whether the outline in the sidebar is short.
 ///
-/// - mini-slides (dictionary): The configuration of the mini-slides. You can set the height, x, display-section, display-subsection, and short-heading of the mini-slides. Default is `(height: auto, x: 2em, display-section: false, inline: true, display-subsection: true, linebreaks: true, short-heading: true)`.
+/// - mini-slides (dictionary): The configuration of the mini-slides. You can set the height, x, display-section, display-subsection, and short-heading of the mini-slides. Default is `(height: auto, x: 2em, display-section: false, inline: true, display-subsection: true, short-heading: true)`.
 ///   - height (length, auto): The height of the mini-slides. If set to `auto`, it is `3em` when `inline` is `true`, and `2.5em` when `inline` is `false`.
 ///   - x (length): The x position of the mini-slides.
 ///   - display-section (boolean): Whether the slides of sections are displayed in the mini-slides.
 ///   - display-subsection (boolean): Whether the slides of subsections are displayed in the mini-slides.
-///   - linebreaks (boolean): Whether line breaks are in between links for sections and subsections in the mini-slides.
 ///   - short-heading (boolean): Whether the mini-slides are short. Default is `true`.
 ///
 /// - footer (content, function): The footer of the slides. Default is `none`.
@@ -485,7 +484,6 @@
       inline: true,
       display-subsection: true,
       spacing: .2em,
-      linebreaks: true,
       short-heading: true,
       current-slide-sym: $triangle.small.b.filled$,
       other-slides-sym: $triangle.small.t.stroked$,
