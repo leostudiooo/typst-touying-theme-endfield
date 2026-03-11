@@ -12,8 +12,11 @@
 #show: endfield-theme.with(
   aspect-ratio: "16-9",
   footer: self => self.info.institution,
-  navigation: "none", // sidebar, mini-slides, none, 如果你有很多小标题和子标题，建议选择 mini-slides 或 none。默认为 none。
-  mini-slides: (height: 3.5em),
+  navigation: "mini-slides", // sidebar, mini-slides, none, 如果你有很多小标题和子标题，建议选择 mini-slides 或 none。默认为 none。
+  mini-slides: (
+    height: 3em,
+    inline: false,
+  ),
   config-store(
     title-height: 4.5em,
   ),
@@ -36,22 +39,21 @@
           庄方宜 @eq-contrib #footnote[塔卫二，武陵科技发展区，宏山科学院]
         ],
 
-        [`{endmin,perlica,jqin,andrew,yvonne}`\ `@endfield.co.ii.talos`],
-        [`fzhuang@has.ac.ii.talos`]
+        [`{endmin,perlica,jqin,andrew,yvonne}`\ `@endfield.co.ii.talos`], [`fzhuang@has.ac.ii.talos`],
       )
     ],
     date: [2026-01-22],
     institution: text("ENDFIELD", font: "Gilroy", weight: "bold") + text(" INDUSTRIES", font: "Gilroy", size: 0.8em),
   ),
   config-page(fill: luma(231)), // 使用侧边栏导航和/或打印时，建议使用纯色而非渐变色
-  
+
   // 你可以设置 CJK 和拉丁文字的默认字体，并指定语言和区域以获得正确的字形和本地化。默认主字体为 `Harmony OS Sans`，你可以通过此设置完全覆盖它。不建议使用 `Arial`，因为它捆绑的 `Arial Unicode Sans MS` CJK 字体很难看；建议使用 `Helvetica` 或 `Source Sans` 以获得更好的显示效果。对于 CJK 字体，`Source Han Sans` 是一个不错的免费选项。
   config-fonts(
     cjk-font-family: ("HarmonyOS Sans SC",),
     latin-font-family: ("HarmonyOS Sans",),
     lang: "zh",
     region: "cn",
-  ) 
+  ),
 )
 
 // 标题编号设置

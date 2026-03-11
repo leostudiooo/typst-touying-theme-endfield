@@ -3,6 +3,7 @@
 // By Leo Li <https://github.com/leostudiooo>
 
 #import "@preview/touying:0.6.3": *
+#import "template/custom-components.typ"
 
 #let _typst-builtin-repeat = repeat
 
@@ -42,7 +43,8 @@
     block(
       fill: self.colors.neutral-dark.darken(50%),
       height: self.store.mini-slides.height - 1em,
-      components.mini-slides(
+      // components.mini-slides(
+      custom-components.mini-slides(
         self: self,
         fill: self.colors.primary,
         alpha: self.store.alpha,
@@ -54,8 +56,11 @@
           "display-subsection",
           default: true,
         ),
-        linebreaks: self.store.mini-slides.at("linebreaks", default: true),
+        linebreaks: false,
+        inline: self.store.mini-slides.at("inline", default: true),
+        spacing: self.store.mini-slides.at("spacing", default: .5em),
         short-heading: self.store.mini-slides.at("short-heading", default: true),
+        dots-font-family: self.store.fonts.latin,
       ),
     )
     v(1em)
@@ -438,8 +443,9 @@
     height: 4em,
     x: 2em,
     display-section: false,
+    inline: true,
     display-subsection: true,
-    linebreaks: true,
+    spacing: .5em,
     short-heading: true,
   ),
   footer: none,
