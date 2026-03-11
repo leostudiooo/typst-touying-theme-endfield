@@ -402,7 +402,7 @@
 ///
 /// - aspect-ratio (string): The aspect ratio of the slides. Default is `16-9`.
 ///
-/// - navigation (string): The navigation of the slides. You can choose from `"sidebar"`, `"mini-slides"`, and `none`. Default is `"sidebar"`.
+/// - navigation (string): The navigation of the slides. You can choose from `"none"`, `"mini-slides"`, and `"sidebar"`. Default is `"mini-slides"`. `"sidebar"` is NOT recommended.
 ///
 /// - sidebar (dictionary): The configuration of the sidebar. You can set the width, filled, numbered, indent, and short-heading of the sidebar. Default is `(width: 10em, filled: false, numbered: false, indent: .5em, short-heading: true)`.
 ///   - width (string): The width of the sidebar.
@@ -431,7 +431,7 @@
 /// - subslide-preamble (content, function): The preamble of the subslide. Default is `self => block(text(1.2em, weight: "bold", fill: self.colors.primary, utils.display-current-heading(depth: self.slide-level)))`.
 #let endfield-theme(
   aspect-ratio: "16-9",
-  navigation: "none",
+  navigation: "mini-slides",
   sidebar: (
     width: 10em,
     filled: false,
