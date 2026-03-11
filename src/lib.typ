@@ -536,7 +536,7 @@
 
   show: touying-slides.with(
     config-page(
-      paper: "presentation-" + aspect-ratio,
+      ..utils.page-args-from-aspect-ratio(aspect-ratio),
       fill: gradient.linear(angle: 90deg, rgb("#e6e6e6").lighten(20%), rgb("#e6e6e6").darken(20%)),
       // fill: rgb("#E6E6E6"),
       background: place(bottom, image("contour_map.svg", width: 100%)),

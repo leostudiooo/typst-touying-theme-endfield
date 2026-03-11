@@ -6,9 +6,9 @@
 // Theme configuration
 // See https://github.com/leostudiooo/typst-touying-theme-endfield/ or package examples directory for usage examples.
 #show: endfield-theme.with(
-  aspect-ratio: "16-9",
+  aspect-ratio: "16-9", // touying 0.6.3+ supports arbitary ratios like "4-3", "1-1", "3-4", etc.
   footer: self => self.info.institution, // or you can set title, author, date, etc. here
-  navigation: "mini-slides", // mini-slides (recommended!), none, or sidebar (not recommended)
+  navigation: "mini-slides", // mini-slides (recommended!), none, or sidebar (not recommended); default "mini-slides"
   // Mini-slides configuration (only effective when navigation: "mini-slides")
   // mini-slides: (
   //   height: auto, // default handled with inline property, adjust this if you have many subtitles and the mini-slides bar height is not enough to display them
