@@ -14,8 +14,9 @@
   footer: self => self.info.institution,
   navigation: "mini-slides", // sidebar, mini-slides, none, 如果你有很多小标题和子标题，建议选择 mini-slides 或 none。默认为 none。
   mini-slides: (
-    height: 3em,
-    inline: false,
+    height: 2.5em,
+    inline: true,
+    spacing: .2em,
   ),
   config-store(
     title-height: 4.5em,

@@ -57,10 +57,11 @@
           default: true,
         ),
         linebreaks: false,
-        inline: self.store.mini-slides.at("inline", default: true),
+        inline: self.store.mini-slides.at("inline", default: false),
         spacing: self.store.mini-slides.at("spacing", default: .5em),
         short-heading: self.store.mini-slides.at("short-heading", default: true),
-        dots-font-family: self.store.fonts.latin,
+        current-slide-sym: self.store.mini-slides.at("current-slide-sym", default: $triangle.small.b.filled$),
+        other-slides-sym: self.store.mini-slides.at("other-slides-sym", default: $triangle.small.t.stroked$),
       ),
     )
     v(1em)
@@ -445,8 +446,10 @@
     display-section: false,
     inline: true,
     display-subsection: true,
-    spacing: .5em,
+    spacing: .2em,
     short-heading: true,
+    current-slide-sym: $triangle.small.b.filled$,
+    other-slides-sym: $triangle.small.t.filled$,
   ),
   footer: none,
   footer-right: context text(utils.slide-counter.display(), fill: rgb("#FFFA01"), weight: "black")

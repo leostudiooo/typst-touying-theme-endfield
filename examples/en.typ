@@ -16,6 +16,9 @@
   mini-slides: (
     height: 3em,
     inline: false,
+    spacing: .2em,
+    current-slide-sym: $triangle.small.b.filled$,
+    other-slides-sym: $triangle.small.t.stroked$,
   ),
   config-store(
     title-height: 6em,

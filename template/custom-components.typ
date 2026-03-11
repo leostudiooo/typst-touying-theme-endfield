@@ -10,7 +10,8 @@
   spacing: .5em,
   short-heading: true,
   inline: false,
-  dots-font-family: none,
+  current-slide-sym: $circle.filled$,
+  other-slides-sym: $circle.stroked$,
 ) = (
   context {
     let headings = query(
@@ -67,9 +68,9 @@
               if (
                 slide.location().page() <= current-page and current-page < next-slide-page
               ) {
-                [#link(slide.location(), sym.circle.filled)<touying-link>]
+                [#link(slide.location(), current-slide-sym)<touying-link>]
               } else {
-                [#link(slide.location(), sym.circle.small)<touying-link>]
+                [#link(slide.location(), other-slides-sym)<touying-link>]
               }
             }
           }
@@ -92,9 +93,9 @@
               if (
                 slide.location().page() <= current-page and current-page < next-slide-page
               ) {
-                [#link(slide.location(), sym.circle.filled)<touying-link>]
+                [#link(slide.location(), current-slide-sym)<touying-link>]
               } else {
-                [#link(slide.location(), sym.circle.small)<touying-link>]
+                [#link(slide.location(), other-slides-sym)<touying-link>]
               }
             }
           }
