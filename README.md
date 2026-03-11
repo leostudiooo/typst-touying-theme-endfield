@@ -104,7 +104,7 @@ Use `config-fonts()` to customize fonts:
 
 ## Example
 
-See the `examples/` directory for complete examples in English and Chinese.
+See the `examples/` directory for complete examples in [English](examples/en.typ) and [Chinese](examples/zh.typ).
 
 ## Fonts
 
