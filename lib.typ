@@ -3,7 +3,7 @@
 // By Leo Li <https://github.com/leostudiooo>
 
 #import "@preview/touying:0.6.3": *
-#import "template/custom-components.typ"
+#import "custom-components.typ"
 
 #let _typst-builtin-repeat = repeat
 
@@ -411,8 +411,8 @@
 ///   - indent (length): The indent of the outline in the sidebar.
 ///   - short-heading (boolean): Whether the outline in the sidebar is short.
 ///
-/// - mini-slides (dictionary): The configuration of the mini-slides. You can set the height, x, display-section, display-subsection, and short-heading of the mini-slides. Default is `(height: 4em, x: 2em, display-section: false, display-subsection: true, linebreaks: true, short-heading: true)`.
-///   - height (length): The height of the mini-slides.
+/// - mini-slides (dictionary): The configuration of the mini-slides. You can set the height, x, display-section, display-subsection, and short-heading of the mini-slides. Default is `(height: auto, x: 2em, display-section: false, inline: true, display-subsection: true, linebreaks: true, short-heading: true)`.
+///   - height (length, auto): The height of the mini-slides. If set to `auto`, it is `3em` when `inline` is `true`, and `2.5em` when `inline` is `false`.
 ///   - x (length): The x position of the mini-slides.
 ///   - display-section (boolean): Whether the slides of sections are displayed in the mini-slides.
 ///   - display-subsection (boolean): Whether the slides of subsections are displayed in the mini-slides.
@@ -441,7 +441,7 @@
     short-heading: true,
   ),
   mini-slides: (
-    height: 4em,
+    height: auto,
     x: 2em,
     display-section: false,
     inline: true,
@@ -449,7 +449,7 @@
     spacing: .2em,
     short-heading: true,
     current-slide-sym: $triangle.small.b.filled$,
-    other-slides-sym: $triangle.small.t.filled$,
+    other-slides-sym: $triangle.small.t.stroked$,
   ),
   footer: none,
   footer-right: context text(utils.slide-counter.display(), fill: rgb("#FFFA01"), weight: "black")
@@ -479,15 +479,29 @@
   )
   mini-slides = utils.merge-dicts(
     (
-      height: 3em,
+      height: auto,
       x: 2em,
       display-section: false,
+      inline: true,
       display-subsection: true,
+      spacing: .2em,
       linebreaks: true,
       short-heading: true,
+      current-slide-sym: $triangle.small.b.filled$,
+      other-slides-sym: $triangle.small.t.stroked$,
     ),
     mini-slides,
   )
+
+  // Compute a dynamic default height from `inline` while preserving explicit overrides.
+  if mini-slides.height == auto {
+    mini-slides = utils.merge-dicts(
+      mini-slides,
+      (
+        height: if mini-slides.inline { 2.5em } else { 3em },
+      ),
+    )
+  }
 
   // Extract font configuration from config-fonts if provided
   // config-fonts returns config-store which is in args.pos()
@@ -501,9 +515,9 @@
     font-config.fonts
   } else {
     (
-      cjk: ("HarmonyOS Sans",),
-      latin: ("HarmonyOS Sans",),
-      combined: ("HarmonyOS Sans",),
+      cjk: ("HarmonyOS Sans SC", "Source Han Sans", "Noto Sans CJK"),
+      latin: ("HarmonyOS Sans", "Source Sans 3", "Noto Sans"),
+      combined: ("HarmonyOS Sans", "Source Sans 3", "Noto Sans", "HarmonyOS Sans SC", "Source Han Sans", "Noto Sans CJK"),
     )
   }
 
